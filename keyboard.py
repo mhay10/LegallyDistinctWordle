@@ -12,8 +12,6 @@ class OnScreenKeyboard:
         ]
         self._create_keyboard()
 
-        print(KEYBOARD_HEIGHT)
-
     def _create_keyboard(self):
         # Calculate starting position for keys
         start_x = (SCREEN_WIDTH - KEYBOARD_WIDTH) // 2

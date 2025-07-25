@@ -16,8 +16,6 @@ class Game:
         self._init_game_state()
         self._init_popups()
 
-        print(f"DEBUG => Answer: {self.answer}")
-
     def _init_pygame(self):
         # Create window
         pygame.init()
