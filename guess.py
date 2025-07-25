@@ -1,4 +1,4 @@
-from constants import NUM_LETTERS
+from constants import *
 
 
 class Guess:

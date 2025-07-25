@@ -40,7 +40,7 @@ class OnScreenKeyboard:
         # Find matching key based on letter
         key = None
         for row in self.keys:
-            key = next((k for k in row if k.letter == letter.lower()), None)
+            key = next((k for k in row if k.letter == letter), None)
             if key is not None:
                 break
 
@@ -59,7 +59,7 @@ class OnScreenKeyboard:
 
 class KeyButton:
     def __init__(self, letter: str, x: int, y: int, font: pygame.Font):
-        self.letter = letter.lower()
+        self.letter = letter
         self.rect = pygame.Rect(x, y, KEYBUTTON_WIDTH, KEYBUTTON_HEIGHT)
         self.color = LIGHT_GREY
         self.text = font.render(letter.upper(), True, WHITE)

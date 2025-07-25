@@ -15,6 +15,7 @@ class Game:
         self._init_game_resources()
         self._init_game_state()
         self._init_popups()
+        self._init_ui_elements()
 
     def _init_pygame(self):
         # Create window
@@ -61,6 +62,20 @@ class Game:
 
     def _init_popups(self):
         self.popup_mgr = PopupManager(self.screen, self.manager, self.answer)
+
+    def _init_ui_elements(self):
+        self.reset_button = pygame_gui.elements.UIButton(
+            manager=self.manager,
+            text="New Game",
+            relative_rect=pygame.Rect(
+                0,
+                SCREEN_HEIGHT - RESET_BUTTON_HEIGHT - RESET_BUTTON_PADDING,
+                RESET_BUTTON_WIDTH,
+                RESET_BUTTON_HEIGHT,
+            ),
+            anchors={"centerx": "centerx"},
+        )
+        self.reset_button.bind(pygame_gui.UI_BUTTON_PRESSED, self.new_game)
 
     def new_game(self):
         # Reset game state
@@ -136,11 +151,13 @@ class Game:
 
             # Draw objects on screen
             self.screen.fill(BLACK)
-            self.draw_gui()
+            self.draw_title()
             self.draw_board()
             self.highlight_active_row()
             self.ui_keyboard.draw(self.screen)
             self.manager.draw_ui(self.screen)
+
+            print(self.clock.get_fps())
 
             # Update screen
             pygame.display.update()
@@ -191,26 +208,12 @@ class Game:
                 width=2,
             )
 
-    def draw_gui(self):
+    def draw_title(self):
         # Draw title
         text = self.sm_title_font.render("LEGALLY DISTINCT", True, WHITE)
         self.screen.blit(text, ((SCREEN_WIDTH - text.get_width()) / 2, 15))
         text = self.lg_title_font.render("WORDLE", True, WHITE)
         self.screen.blit(text, ((SCREEN_WIDTH - text.get_width()) / 2, 32))
-
-        # Draw restart button
-        reset_button = pygame_gui.elements.UIButton(
-            manager=self.manager,
-            text="New Game",
-            relative_rect=pygame.Rect(
-                0,
-                SCREEN_HEIGHT - RESET_BUTTON_HEIGHT - RESET_BUTTON_PADDING,
-                RESET_BUTTON_WIDTH,
-                RESET_BUTTON_HEIGHT,
-            ),
-            anchors={"centerx": "centerx"},
-        )
-        reset_button.bind(pygame_gui.UI_BUTTON_PRESSED, self.new_game)
 
 
 if __name__ == "__main__":
