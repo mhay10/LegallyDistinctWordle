@@ -157,8 +157,6 @@ class Game:
             self.ui_keyboard.draw(self.screen)
             self.manager.draw_ui(self.screen)
 
-            print(self.clock.get_fps())
-
             # Update screen
             pygame.display.update()
             self.clock.tick(FPS)
